@@ -40,6 +40,15 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      submitButton={
+        <button
+          className="popup__submit-button"
+          type="submit"
+          aria-label="Сохранить"
+        >
+          Сохранить
+        </button>
+      }
     >
       <label className="popup__field">
         <input

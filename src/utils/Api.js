@@ -74,15 +74,15 @@ class Api {
 
   changeLikeCardStatus(card, likeCardStatus) {
     return fetch(`${this._serverUrl}/cards/${card}/likes/`, {
-      method: (likeCardStatus ? "PUT": "DELETE"),
+      method: likeCardStatus ? "PUT" : "DELETE",
       headers: {
         authorization: this._token,
       },
     }).then((res) => this._requestResult(res));
-    }
+  }
 
-  deleteCard(card) {
-    return fetch(`${this._serverUrl}/cards/${card._id}`, {
+  deleteCard(_id) {
+    return fetch(`${this._serverUrl}/cards/${_id}`, {
       method: "DELETE",
       headers: {
         authorization: this._token,
