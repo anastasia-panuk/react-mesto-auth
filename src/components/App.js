@@ -7,7 +7,7 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AppPlacePopup from "./AddPlacePopup";
 import InfoTooltip from "./InfoTooltip";
-import DeliteCardConformPopup from "./DeliteCardConformPopup";
+import DeliteCardConfirmPopup from "./DeliteCardConfirmPopup";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import {
@@ -294,7 +294,7 @@ function App() {
               onAddPlace={handleAddPlaceSubmit}
             />
 
-            <DeliteCardConformPopup
+            <DeliteCardConfirmPopup
               isOpen={isDeleteCardConfirmOpen}
               onClose={handleClosePopupsClick}
               onCardDeleteConform={handleCardDelete}

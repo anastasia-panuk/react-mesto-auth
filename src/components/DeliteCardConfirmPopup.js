@@ -1,7 +1,7 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function DeliteCardConformPopup({ isOpen, onClose, onCardDeleteConform }) {
+function DeliteCardConfirmPopup({ isOpen, onClose, onCardDeleteConform }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     onCardDeleteConform();
@@ -23,4 +23,4 @@ function DeliteCardConformPopup({ isOpen, onClose, onCardDeleteConform }) {
   );
 }
 
-export default DeliteCardConformPopup;
+export default DeliteCardConfirmPopup;
