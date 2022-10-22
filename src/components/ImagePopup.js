@@ -14,6 +14,7 @@ function ImagePopup({ card, onClose }) {
           className="popup__close-button"
           type="button"
           aria-label="Закрыть"
+          onClick={onClose}
         ></button>
         <figure className="popup__figure">
           <img
