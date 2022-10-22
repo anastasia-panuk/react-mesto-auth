@@ -12,7 +12,12 @@ function PopupWithForm({
       className={`popup popup_type_${name} popup${isOpen ? "_opened" : ""}`}
       onClick={onClose}
     >
-      <div className="popup__container">
+      <div
+        className="popup__container"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <button
           className="popup__close-button"
           type="button"

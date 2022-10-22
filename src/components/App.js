@@ -116,7 +116,7 @@ function App() {
     api
       .deleteCard(cardID)
       .then(() => {
-        setCards(cards.filter((state) => state._id !== cardID));
+        setCards((state) => state.filter((item) => item._id !== cardID));
         closeAllPopups();
       })
       .catch((err) => console.log(err));
@@ -139,11 +139,15 @@ function App() {
   }
 
   function handleRagisterUserData(password, email) {
-    return userAutentification(password, email).then(() => {
-      setIsSucsessfulRequest(true);
-      setIsRegistrationConfirmOpen(true);
-      history.push("/sign-in");
-    });
+    return userAutentification(password, email)
+      .then(() => {
+        setIsSucsessfulRequest(true);
+        setIsRegistrationConfirmOpen(true);
+        history.push("/sign-in");
+      })
+      .catch((err) => {
+        console.log(`${err} - некорректно заполнено одно из полей `);
+      });
   }
 
   function handleLogin(password, email) {
@@ -155,7 +159,12 @@ function App() {
         setEmail(email);
         history.push("/main");
       })
-      .catch(() => {
+      .catch((err) => {
+        if (err === 400) {
+          console.log(`${err} - не передано одно из полей`);
+        } else if (err === 401) {
+          console.log(`${err} - что-то не так с email`);
+        }
         setIsSucsessfulRequest(false);
         setIsRegistrationConfirmOpen(true);
       });
@@ -171,11 +180,13 @@ function App() {
           setEmail(res.data.email);
           history.push("/main");
         })
-        .catch((res) => {
-          if (res.status === 400) {
-            return `${res.status} - не передано одно из полей`;
-          } else if (res.status === 401) {
-            return `${res.status} - пользователь с email не найден`;
+        .catch((err) => {
+          if (err === 400) {
+            console.log(
+              `${err} - токен не передан или передан не в том формате`
+            );
+          } else if (err === 401) {
+            return `${err} - переданный токен некорректен`;
           }
         });
     }
@@ -195,15 +206,6 @@ function App() {
     setSelectedCard({});
     setIsDeleteCardConfirmOpen(null);
     setIsRegistrationConfirmOpen(false);
-  }
-
-  function handleClosePopupsClick(e) {
-    if (
-      e.target.classList.contains("popup") ||
-      e.target.classList.contains("popup__close-button")
-    ) {
-      closeAllPopups();
-    }
   }
 
   function handleUpdateUser(user) {
@@ -263,7 +265,7 @@ function App() {
             name="login-confirm"
             isOpen={isRegistrationConfirmOpen}
             isOk={isSucsessfulRequest}
-            onClose={handleClosePopupsClick}
+            onClose={closeAllPopups}
           />
 
           <ProtectedRoute path={"/main"} loggedIn={loggedIn}>
@@ -278,29 +280,29 @@ function App() {
             />
             <EditProfilePopup
               isOpen={isEditProfilePopupOpen}
-              onClose={handleClosePopupsClick}
+              onClose={closeAllPopups}
               onUpdateUser={handleUpdateUser}
             />
 
             <EditAvatarPopup
               isOpen={isEditAvatarPopupOpen}
-              onClose={handleClosePopupsClick}
+              onClose={closeAllPopups}
               onUpdateAvatar={handleUpdateAvatar}
             />
 
             <AppPlacePopup
               isOpen={isAddPlacePopupOpen}
-              onClose={handleClosePopupsClick}
+              onClose={closeAllPopups}
               onAddPlace={handleAddPlaceSubmit}
             />
 
             <DeliteCardConfirmPopup
               isOpen={isDeleteCardConfirmOpen}
-              onClose={handleClosePopupsClick}
+              onClose={closeAllPopups}
               onCardDeleteConform={handleCardDelete}
             />
 
-            <ImagePopup card={selectedCard} onClose={handleClosePopupsClick} />
+            <ImagePopup card={selectedCard} onClose={closeAllPopups} />
           </ProtectedRoute>
 
           <Footer />

@@ -5,7 +5,6 @@ function Login({ onLoginSubmit }) {
   const [state, setState] = React.useState({
     password: "",
     email: "",
-    message: "",
   });
 
   function handleChange(evt) {
@@ -19,10 +18,9 @@ function Login({ onLoginSubmit }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     const { password, email } = state;
-    onLoginSubmit(password, email).catch((err) => console.log(err));
+    onLoginSubmit(password, email);
     setState({
       ...state,
-      message: "Что-то пошло не так!",
     });
   }
 

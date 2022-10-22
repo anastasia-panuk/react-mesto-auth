@@ -5,7 +5,6 @@ function Register({ onRegisterSubmit }) {
   const [state, setState] = React.useState({
     password: "",
     email: "",
-    message: "",
   });
 
   function handleChange(evt) {
@@ -19,12 +18,11 @@ function Register({ onRegisterSubmit }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     const { password, email } = state;
-    onRegisterSubmit(password, email).catch((err) => console.log(err));
+    onRegisterSubmit(password, email);
     setState({
       ...state,
-      message: "Что-то пошло не так!",
-    });
-  }
+  })
+}
 
   return (
     <WelcomeForm

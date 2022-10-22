@@ -4,7 +4,12 @@ function ImagePopup({ card, onClose }) {
       className={`popup popup_type_picture popup${card.link ? "_opened" : ""}`}
       onClick={onClose}
     >
-      <div className="popup__container popup__container_image">
+      <div
+        className="popup__container popup__container_image"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <button
           className="popup__close-button"
           type="button"
