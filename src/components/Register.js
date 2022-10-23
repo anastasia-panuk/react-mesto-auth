@@ -19,9 +19,6 @@ function Register({ onRegisterSubmit }) {
     evt.preventDefault();
     const { password, email } = state;
     onRegisterSubmit(password, email);
-    setState({
-      ...state,
-  })
 }
 
   return (

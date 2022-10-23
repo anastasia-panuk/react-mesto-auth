@@ -147,6 +147,8 @@ function App() {
       })
       .catch((err) => {
         console.log(`${err} - некорректно заполнено одно из полей `);
+        setIsSucsessfulRequest(false);
+        setIsRegistrationConfirmOpen(true);
       });
   }
 

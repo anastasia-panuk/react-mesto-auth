@@ -19,9 +19,6 @@ function Login({ onLoginSubmit }) {
     evt.preventDefault();
     const { password, email } = state;
     onLoginSubmit(password, email);
-    setState({
-      ...state,
-    });
   }
 
   return (
